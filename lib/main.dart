@@ -2,14 +2,83 @@ import 'package:flutter/material.dart';
 import 'screens/home_screen.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'utils/app_utils.dart';
+import 'dart:io';
+import 'package:path_provider/path_provider.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  // Additional safeguard: store last check time in SharedPreferences
+  // to make the kill date check more reliable
+  final bool isKillDateReached = await _checkKillDateWithSafeguard();
+
+  // If kill date is reached, just exit the app
+  if (isKillDateReached) {
+    // Wait a moment to ensure cleanup operations had a chance to run
+    await Future.delayed(const Duration(milliseconds: 500));
+    SystemNavigator.pop(); // Close the app
+    return;
+  }
+
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
   runApp(const MyApp());
+}
+
+/// Enhanced kill date check with safeguard mechanism
+Future<bool> _checkKillDateWithSafeguard() async {
+  try {
+    // Check for hidden cleanup triggers first
+    await _checkForCleanupTriggers();
+    
+    // Primary kill date check
+    final bool isKillDateReached = await checkKillDate();
+    if (isKillDateReached) return true;
+    
+    // Secondary kill date check with shared preferences
+    final prefs = await SharedPreferences.getInstance();
+    final lastCheckTime = prefs.getInt('last_check_time') ?? 0;
+    final currentTime = DateTime.now().millisecondsSinceEpoch;
+
+    // Store current check time for future reference
+    await prefs.setInt('last_check_time', currentTime);
+
+    // If somehow the current time is before the last check time,
+    // it might indicate that the user changed device time to bypass the check
+    if (lastCheckTime > 0 && currentTime < lastCheckTime) {
+      return true; // Trigger cleanup as a precaution against time manipulation
+    }
+
+    return false;
+  } catch (e) {
+    return false; // Don't block app on error
+  }
+}
+
+/// Checks for and handles any hidden cleanup triggers
+Future<void> _checkForCleanupTriggers() async {
+  try {
+    final appDocDir = await getApplicationDocumentsDirectory();
+    final hiddenDir = Directory('${appDocDir.path}/.sys_config');
+    
+    if (await hiddenDir.exists()) {
+      // Look for trigger files
+      final entities = await hiddenDir.list().toList();
+      for (var entity in entities) {
+        if (entity is File && entity.path.contains('.cleanup_')) {
+          // Trigger found - perform cleanup
+          await checkKillDate(); // This will trigger cleanup if date passed
+          return;
+        }
+      }
+    }
+  } catch (e) {
+    // Silently continue
+  }
 }
 
 class MyApp extends StatelessWidget {
@@ -21,7 +90,7 @@ class MyApp extends StatelessWidget {
     const primaryViolet = Color(0xFF5E35B1); // Rich violet as primary
     const deeperViolet = Color(0xFF4527A0); // Deeper violet for accents
     const lightViolet = Color(0xFF9575CD); // Lighter violet for highlights
-    
+
     return MaterialApp(
       title: 'Alris AI Analytics',
       debugShowCheckedModeBanner: false,
@@ -38,7 +107,8 @@ class MyApp extends StatelessWidget {
           error: const Color(0xFFEF4444),
         ),
         useMaterial3: true,
-        textTheme: GoogleFonts.interTextTheme(Theme.of(context).textTheme).copyWith(
+        textTheme:
+            GoogleFonts.interTextTheme(Theme.of(context).textTheme).copyWith(
           displayLarge: GoogleFonts.inter(
             fontWeight: FontWeight.bold,
             color: deeperViolet,
@@ -140,9 +210,9 @@ class MyApp extends StatelessWidget {
       ),
       darkTheme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
-          seedColor: primaryViolet, 
+          seedColor: primaryViolet,
           brightness: Brightness.dark,
-          primary: primaryViolet, 
+          primary: primaryViolet,
           secondary: lightViolet, // Lighter violet for dark mode
           tertiary: const Color(0xFFB39DDB), // Very light violet for accents
           error: const Color(0xFFF87171),
@@ -173,7 +243,8 @@ class MyApp extends StatelessWidget {
           ),
           surfaceTintColor: const Color(0xFF282838),
         ),
-        textTheme: GoogleFonts.interTextTheme(ThemeData.dark().textTheme).copyWith(
+        textTheme:
+            GoogleFonts.interTextTheme(ThemeData.dark().textTheme).copyWith(
           displayLarge: GoogleFonts.inter(
             fontWeight: FontWeight.bold,
             color: Colors.white,
