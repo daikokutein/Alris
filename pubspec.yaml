@@ -1,5 +1,5 @@
 name: alris
-description: "A URL analyzer with history tracking."
+description: "A privacy-focused URL analyzer with history tracking."
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
@@ -19,7 +19,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: ^3.7.2
+  sdk: '>=3.0.0 <4.0.0'
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -33,13 +33,13 @@ dependencies:
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^1.0.8
-  shared_preferences: ^2.2.2
-  intl: ^0.19.0
-  google_fonts: ^6.2.1
-  flutter_svg: ^2.0.10+1
-  url_launcher: ^6.2.5
-  flutter_animate: ^4.5.0
+  cupertino_icons: ^1.0.2
+  shared_preferences: ^2.2.0
+  intl: ^0.18.1
+  google_fonts: ^5.1.0
+  flutter_svg: ^2.0.7
+  url_launcher: ^6.1.14
+  flutter_animate: ^4.2.0
 
 dev_dependencies:
   flutter_test:
@@ -51,16 +51,28 @@ dev_dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^5.0.0
+  flutter_lints: ^2.0.0
 
 # Flutter launcher icons configuration
 flutter_launcher_icons:
   android: true
   ios: true
-  image_path: "assets/images/app_icon.png"
-  adaptive_icon_background: "#0A1520"
-  adaptive_icon_foreground: "assets/images/app_icon_foreground.png"
+  image_path: "assets/images/app_icon.svg"
+  adaptive_icon_background: "#0F172A" # Dark blue background color
+  adaptive_icon_foreground: "assets/images/app_icon.svg"
   min_sdk_android: 21
+  web:
+    generate: true
+    image_path: "assets/images/app_icon.svg"
+    background_color: "#0F172A"
+    theme_color: "#00E5FF"
+  windows:
+    generate: true
+    image_path: "assets/images/app_icon.svg"
+    icon_size: 48
+  macos:
+    generate: true
+    image_path: "assets/images/app_icon.svg"
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
