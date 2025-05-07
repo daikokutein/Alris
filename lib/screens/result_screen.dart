@@ -68,11 +68,16 @@ class _ResultScreenState extends State<ResultScreen> {
   @override
   Widget build(BuildContext context) {
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
-    final logoColor = const Color(0xFF00E5FF); // Cyan from the logo
+    final violetColor = const Color(0xFF5E35B1); // Rich violet color
     
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Analysis Results'),
+        title: const Text(
+          'Analysis Results',
+          style: TextStyle(
+            fontWeight: FontWeight.w600,
+          ),
+        ),
         elevation: 0,
       ),
       body: _isLoading
@@ -84,7 +89,7 @@ class _ResultScreenState extends State<ResultScreen> {
                     width: 50,
                     height: 50,
                     child: CircularProgressIndicator(
-                      color: logoColor,
+                      color: violetColor,
                       strokeWidth: 3,
                     ),
                   ),
@@ -94,6 +99,15 @@ class _ResultScreenState extends State<ResultScreen> {
                     style: TextStyle(
                       fontSize: 16,
                       color: isDarkMode ? Colors.white70 : Colors.black54,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    '(Demo: No actual analysis is performed)',
+                    style: TextStyle(
+                      fontSize: 12,
+                      fontStyle: FontStyle.italic,
+                      color: isDarkMode ? Colors.white38 : Colors.black38,
                     ),
                   ),
                 ],
@@ -180,7 +194,7 @@ class _ResultScreenState extends State<ResultScreen> {
   }
 
   Widget _buildUrlCard(BuildContext context) {
-    final logoColor = const Color(0xFF00E5FF); // Cyan from the logo
+    final violetColor = const Color(0xFF5E35B1); // Rich violet color
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
     
     return Card(
@@ -201,12 +215,12 @@ class _ResultScreenState extends State<ResultScreen> {
             Container(
               padding: const EdgeInsets.all(10),
               decoration: BoxDecoration(
-                color: logoColor.withOpacity(0.1),
+                color: violetColor.withOpacity(0.1),
                 shape: BoxShape.circle,
               ),
               child: Icon(
                 Icons.link_rounded,
-                color: logoColor,
+                color: violetColor,
                 size: 24,
               ),
             ),
@@ -221,7 +235,7 @@ class _ResultScreenState extends State<ResultScreen> {
                       fontWeight: FontWeight.w600,
                       color: isDarkMode 
                           ? Colors.white70 
-                          : const Color(0xFF2D1B69),
+                          : violetColor,
                       fontSize: 14,
                     ),
                   ),
@@ -244,7 +258,7 @@ class _ResultScreenState extends State<ResultScreen> {
             IconButton(
               icon: Icon(
                 Icons.content_copy,
-                color: logoColor.withOpacity(0.7),
+                color: violetColor.withOpacity(0.7),
                 size: 20,
               ),
               onPressed: () {
@@ -271,86 +285,87 @@ class _ResultScreenState extends State<ResultScreen> {
             : Colors.red;
     
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
-    final bgColor1 = isDarkMode 
-        ? const Color(0xFF1A0F3C) 
-        : Colors.white;
-    final bgColor2 = isDarkMode 
-        ? const Color(0xFF2D1B69).withOpacity(0.8) 
-        : const Color(0xFFF8F9FA);
+    final violetColor = const Color(0xFF5E35B1); // Rich violet color
     
-    return Container(
-      padding: const EdgeInsets.all(24),
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: [bgColor1, bgColor2],
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-        ),
+    return Card(
+      elevation: 0,
+      shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16),
-        boxShadow: [
-          BoxShadow(
-            color: safetyColor.withOpacity(0.2),
-            blurRadius: 15,
-            offset: const Offset(0, 5),
-          ),
-        ],
-        border: Border.all(
+        side: BorderSide(
           color: safetyColor.withOpacity(0.3),
-          width: 1.5,
+          width: 1,
         ),
       ),
-      child: Row(
-        children: [
-          Container(
-            padding: const EdgeInsets.all(12),
-            decoration: BoxDecoration(
-              color: safetyColor.withOpacity(0.15),
-              shape: BoxShape.circle,
-              border: Border.all(
-                color: safetyColor,
-                width: 2,
-              ),
-            ),
-            child: Icon(
-              _result.isSafe ? Icons.check_circle : Icons.warning_rounded,
-              color: safetyColor,
-              size: 32,
-            ),
-          ),
-          const SizedBox(width: 20),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+      child: Padding(
+        padding: const EdgeInsets.all(24.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
               children: [
-                Text(
-                  _result.isSafe ? 'Safe to Visit' : 'Potentially Unsafe',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20,
+                Container(
+                  padding: const EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: safetyColor.withOpacity(0.1),
+                    shape: BoxShape.circle,
+                    border: Border.all(
+                      color: safetyColor,
+                      width: 2,
+                    ),
+                  ),
+                  child: Icon(
+                    _result.isSafe ? Icons.check_circle : Icons.warning_rounded,
                     color: safetyColor,
+                    size: 32,
                   ),
                 ),
-                const SizedBox(height: 6),
-                Text(
-                  'Safety Score: ${_result.safetyScore}%',
-                  style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500,
-                    color: isDarkMode ? Colors.white70 : Colors.black54,
+                const SizedBox(width: 20),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        _result.isSafe ? 'Safe to Visit' : 'Potentially Unsafe',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                          color: safetyColor,
+                        ),
+                      ),
+                      const SizedBox(height: 6),
+                      Text(
+                        'Safety Score: ${_result.safetyScore}%',
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500,
+                          color: isDarkMode ? Colors.white70 : Colors.black54,
+                        ),
+                      ),
+                    ],
                   ),
-                ),
-                const SizedBox(height: 12),
-                LinearProgressIndicator(
-                  value: _result.safetyScore / 100,
-                  backgroundColor: Colors.grey.withOpacity(0.2),
-                  valueColor: AlwaysStoppedAnimation<Color>(safetyColor),
-                  borderRadius: BorderRadius.circular(10),
-                  minHeight: 8,
                 ),
               ],
             ),
-          ),
-        ],
+            const SizedBox(height: 12),
+            LinearProgressIndicator(
+              value: _result.safetyScore / 100,
+              backgroundColor: Colors.grey.withOpacity(0.2),
+              valueColor: AlwaysStoppedAnimation<Color>(safetyColor),
+              borderRadius: BorderRadius.circular(10),
+              minHeight: 8,
+            ),
+            const SizedBox(height: 12),
+            Text(
+              'Note: This is a demo with simulated results',
+              style: TextStyle(
+                fontSize: 12,
+                fontStyle: FontStyle.italic,
+                color: isDarkMode ? Colors.white38 : Colors.black38,
+              ),
+              textAlign: TextAlign.center,
+            ),
+          ],
+        ),
       ),
     );
   }

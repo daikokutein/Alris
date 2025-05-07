@@ -17,22 +17,21 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Define logo color for consistent use throughout the app
-    const logoColor = Color(0xFF00E5FF); // Cyan from the eye logo
-    // Define dark purple color for the theme
-    const darkPurple = Color(0xFF2D1B69);
-    const deeperPurple = Color(0xFF1A0F3C);
+    // Define theme colors for consistent use throughout the app
+    const primaryViolet = Color(0xFF5E35B1); // Rich violet as primary
+    const deeperViolet = Color(0xFF4527A0); // Deeper violet for accents
+    const lightViolet = Color(0xFF9575CD); // Lighter violet for highlights
     
     return MaterialApp(
-      title: 'Alris',
+      title: 'Alris AI Analytics',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
-          seedColor: logoColor,
+          seedColor: primaryViolet,
           brightness: Brightness.light,
-          primary: logoColor,
-          secondary: darkPurple,
-          tertiary: const Color(0xFF38BDF8), // Light blue
+          primary: primaryViolet,
+          secondary: deeperViolet,
+          tertiary: lightViolet,
           surface: Colors.white,
           surfaceTint: Colors.white.withOpacity(0.9),
           surfaceContainer: const Color(0xFFF8F9FA),
@@ -42,19 +41,19 @@ class MyApp extends StatelessWidget {
         textTheme: GoogleFonts.interTextTheme(Theme.of(context).textTheme).copyWith(
           displayLarge: GoogleFonts.inter(
             fontWeight: FontWeight.bold,
-            color: deeperPurple,
+            color: deeperViolet,
           ),
           displayMedium: GoogleFonts.inter(
             fontWeight: FontWeight.bold,
-            color: deeperPurple,
+            color: deeperViolet,
           ),
           headlineMedium: GoogleFonts.inter(
             fontWeight: FontWeight.bold,
-            color: deeperPurple,
+            color: deeperViolet,
           ),
           titleLarge: GoogleFonts.inter(
             fontWeight: FontWeight.w600,
-            color: deeperPurple,
+            color: deeperViolet,
           ),
           bodyLarge: GoogleFonts.inter(
             color: const Color(0xFF334155),
@@ -67,18 +66,18 @@ class MyApp extends StatelessWidget {
           centerTitle: false,
           elevation: 0,
           backgroundColor: Colors.white,
-          foregroundColor: deeperPurple,
+          foregroundColor: deeperViolet,
           systemOverlayStyle: SystemUiOverlayStyle.dark,
           titleTextStyle: GoogleFonts.inter(
             fontSize: 18,
             fontWeight: FontWeight.w600,
-            color: deeperPurple,
+            color: deeperViolet,
           ),
         ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
             elevation: 0,
-            backgroundColor: logoColor,
+            backgroundColor: primaryViolet,
             foregroundColor: Colors.white,
             padding: const EdgeInsets.symmetric(vertical: 16),
             shape: RoundedRectangleBorder(
@@ -93,7 +92,7 @@ class MyApp extends StatelessWidget {
         ),
         textButtonTheme: TextButtonThemeData(
           style: TextButton.styleFrom(
-            foregroundColor: logoColor,
+            foregroundColor: primaryViolet,
             textStyle: GoogleFonts.inter(
               fontSize: 15,
               fontWeight: FontWeight.w500,
@@ -113,7 +112,7 @@ class MyApp extends StatelessWidget {
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(12),
-            borderSide: BorderSide(color: logoColor, width: 2),
+            borderSide: BorderSide(color: primaryViolet, width: 2),
           ),
           contentPadding: const EdgeInsets.all(16),
           hintStyle: GoogleFonts.inter(
@@ -141,23 +140,23 @@ class MyApp extends StatelessWidget {
       ),
       darkTheme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
-          seedColor: logoColor, 
+          seedColor: primaryViolet, 
           brightness: Brightness.dark,
-          primary: logoColor, // Using the same cyan in dark mode
-          secondary: const Color(0xFF81E6FF), // Lighter cyan
-          tertiary: const Color(0xFF38BDF8), // Light blue
+          primary: primaryViolet, 
+          secondary: lightViolet, // Lighter violet for dark mode
+          tertiary: const Color(0xFFB39DDB), // Very light violet for accents
           error: const Color(0xFFF87171),
-          surface: const Color(0xFF0A0A18),
-          background: const Color(0xFF0A0A18),
-          surfaceContainer: const Color(0xFF1A0F3C),
-          surfaceTint: const Color(0xFF1A0F3C),
+          surface: const Color(0xFF2C2C3B),
+          background: const Color(0xFF1E1E2C),
+          surfaceContainer: const Color(0xFF282838),
+          surfaceTint: const Color(0xFF282838),
         ),
         useMaterial3: true,
-        scaffoldBackgroundColor: const Color(0xFF0A0A18),
+        scaffoldBackgroundColor: const Color(0xFF1E1E2C),
         appBarTheme: AppBarTheme(
           centerTitle: false,
           elevation: 0,
-          backgroundColor: const Color(0xFF1A0F3C),
+          backgroundColor: const Color(0xFF282838),
           systemOverlayStyle: SystemUiOverlayStyle.light,
           titleTextStyle: GoogleFonts.inter(
             fontSize: 18,
@@ -167,12 +166,12 @@ class MyApp extends StatelessWidget {
         ),
         cardTheme: CardTheme(
           elevation: 2,
-          color: const Color(0xFF1A0F3C),
+          color: const Color(0xFF282838),
           shadowColor: Colors.black.withOpacity(0.15),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16),
           ),
-          surfaceTintColor: const Color(0xFF1A0F3C),
+          surfaceTintColor: const Color(0xFF282838),
         ),
         textTheme: GoogleFonts.interTextTheme(ThemeData.dark().textTheme).copyWith(
           displayLarge: GoogleFonts.inter(
@@ -201,8 +200,8 @@ class MyApp extends StatelessWidget {
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
             elevation: 0,
-            backgroundColor: logoColor,
-            foregroundColor: Colors.black87,
+            backgroundColor: primaryViolet,
+            foregroundColor: Colors.white,
             padding: const EdgeInsets.symmetric(vertical: 16),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(12),
@@ -211,7 +210,7 @@ class MyApp extends StatelessWidget {
         ),
         inputDecorationTheme: InputDecorationTheme(
           filled: true,
-          fillColor: const Color(0xFF1A0F3C),
+          fillColor: const Color(0xFF282838),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(12),
             borderSide: BorderSide(color: Colors.grey[800]!),
@@ -222,7 +221,7 @@ class MyApp extends StatelessWidget {
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(12),
-            borderSide: BorderSide(color: logoColor, width: 2),
+            borderSide: BorderSide(color: primaryViolet, width: 2),
           ),
           hintStyle: GoogleFonts.inter(
             fontSize: 15,

@@ -91,24 +91,16 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
   Widget build(BuildContext context) {
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
     final primaryColor = Theme.of(context).colorScheme.primary;
-    final logoColor = const Color(0xFF00E5FF); // Using the cyan color from the logo
+    final violetColor = const Color(0xFF5E35B1); // Rich violet color
     
     return Scaffold(
       appBar: AppBar(
-        title: Row(
-          children: [
-            SvgPicture.asset(
-              'assets/images/logo.svg',
-              width: 24,
-              height: 24,
-              colorFilter: ColorFilter.mode(
-                logoColor, 
-                BlendMode.srcIn
-              ),
-            ),
-            const SizedBox(width: 8),
-            const Text('Alris'),
-          ],
+        title: const Text(
+          'Alris AI',
+          style: TextStyle(
+            fontWeight: FontWeight.w700,
+            letterSpacing: 0.5,
+          ),
         ),
         actions: [
           IconButton(
@@ -122,9 +114,9 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
               showDialog(
                 context: context,
                 builder: (context) => AlertDialog(
-                  title: const Text('About Alris'),
+                  title: const Text('About Alris AI'),
                   content: const Text(
-                    'Alris is a privacy-focused URL analyzer that helps you check links safely.',
+                    'Alris AI is a concept demo for a URL analytics application. Currently, this is just a UI demonstration and does not perform actual analysis.',
                   ),
                   actions: [
                     TextButton(
@@ -147,81 +139,13 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const SizedBox(height: 20),
-                // Logo container with dark background
-                Container(
-                  width: 200,
-                  height: 200,
-                  decoration: BoxDecoration(
-                    color: isDarkMode 
-                        ? const Color(0xFF1A0F3C) 
-                        : const Color(0xFF2D1B69),
-                    shape: BoxShape.circle,
-                    boxShadow: [
-                      BoxShadow(
-                        color: logoColor.withOpacity(0.3),
-                        blurRadius: 40,
-                        spreadRadius: 5,
-                      ),
-                    ],
-                  ),
-                  child: Center(
-                    child: AnimatedBuilder(
-                      animation: _pulseController,
-                      builder: (context, child) {
-                        return Stack(
-                          alignment: Alignment.center,
-                          children: [
-                            // Glow effect behind the logo
-                            Container(
-                              width: 160 + (_pulseController.value * 15),
-                              height: 160 + (_pulseController.value * 15),
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: logoColor.withOpacity(0.3 + (_pulseController.value * 0.2)),
-                                    blurRadius: 30 + (_pulseController.value * 20),
-                                    spreadRadius: 5,
-                                  ),
-                                ],
-                              ),
-                            ),
-                            // Actual logo
-                            Hero(
-                              tag: 'logo',
-                              child: SvgPicture.asset(
-                                'assets/images/logo.svg',
-                                width: 140 + (_pulseController.value * 10),
-                                height: 140 + (_pulseController.value * 10),
-                                colorFilter: ColorFilter.mode(
-                                  logoColor,
-                                  BlendMode.srcIn
-                                ),
-                              ),
-                            ),
-                          ],
-                        );
-                      },
-                    ),
-                  ),
-                )
-                .animate()
-                .fadeIn(duration: 800.ms)
-                .scale(
-                  begin: const Offset(0.7, 0.7), 
-                  end: const Offset(1, 1),
-                  duration: 1000.ms,
-                  curve: Curves.easeOutBack
-                ),
-                
-                const SizedBox(height: 32),
+                const SizedBox(height: 40),
                 
                 Text(
-                  'Smart URL Analysis',
+                  'Alris AI Analytics',
                   style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                     fontWeight: FontWeight.w800,
-                    color: isDarkMode ? Colors.white : const Color(0xFF1A0F3C),
+                    color: isDarkMode ? Colors.white : violetColor,
                   ),
                   textAlign: TextAlign.center,
                 )
@@ -231,7 +155,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                 const SizedBox(height: 16),
                 
                 Text(
-                  'Enter any link and Alris will analyze it for potential security threats.',
+                  'Enter any link to analyze. Note: This is a UI demo and does not perform real analysis yet.',
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                     fontSize: 16,
                   ),
@@ -247,9 +171,9 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                     borderRadius: BorderRadius.circular(24),
                     boxShadow: [
                       BoxShadow(
-                        color: logoColor.withOpacity(0.15),
-                        blurRadius: 25,
-                        offset: const Offset(0, 10),
+                        color: violetColor.withOpacity(0.1),
+                        blurRadius: 20,
+                        offset: const Offset(0, 8),
                       ),
                     ],
                   ),
@@ -259,7 +183,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                       borderRadius: BorderRadius.circular(24),
                     ),
                     child: Padding(
-                      padding: const EdgeInsets.all(24.0),
+                      padding: const EdgeInsets.all(28.0),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -269,11 +193,11 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                               fontWeight: FontWeight.w600,
                               color: isDarkMode 
                                 ? Colors.white70 
-                                : const Color(0xFF2D1B69),
+                                : violetColor,
                               fontSize: 16,
                             ),
                           ),
-                          const SizedBox(height: 12),
+                          const SizedBox(height: 16),
                           TextFormField(
                             controller: _linkController,
                             decoration: InputDecoration(
@@ -283,7 +207,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                               ),
                               prefixIcon: Icon(
                                 Icons.link_rounded,
-                                color: logoColor.withOpacity(0.7),
+                                color: violetColor.withOpacity(0.7),
                               ),
                               suffixIcon: _linkController.text.isNotEmpty
                                   ? IconButton(
@@ -296,7 +220,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                               focusedBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(16),
                                 borderSide: BorderSide(
-                                  color: logoColor,
+                                  color: violetColor,
                                   width: 2,
                                 ),
                               ),
@@ -318,7 +242,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                             },
                             onChanged: (_) => setState(() {}),
                           ),
-                          const SizedBox(height: 24),
+                          const SizedBox(height: 28),
                           SizedBox(
                             width: double.infinity,
                             height: 56,
@@ -337,7 +261,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                               label: Text(_isLoading ? 'Analyzing...' : 'Analyze Now'),
                               style: ElevatedButton.styleFrom(
                                 elevation: 0,
-                                backgroundColor: logoColor,
+                                backgroundColor: violetColor,
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(16),
                                 ),
@@ -353,17 +277,17 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                 .fadeIn(delay: 600.ms, duration: 500.ms)
                 .slideY(delay: 600.ms, begin: 0.1, end: 0, curve: Curves.easeOutQuint),
                 
-                const SizedBox(height: 32),
+                const SizedBox(height: 40),
                 
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     InfoCard(
                       icon: Icons.security_rounded,
-                      title: 'Secure',
-                      description: 'Your data stays private and never leaves your device',
+                      title: 'AI Security',
+                      description: 'Future feature: Advanced AI-based link analysis',
                       delay: 800,
-                      iconColor: logoColor,
+                      iconColor: violetColor,
                     ),
                     const SizedBox(width: 16),
                     InfoCard(
@@ -372,7 +296,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                       description: 'Keep track of all your previously analyzed links',
                       delay: 900,
                       onTap: _goToHistory,
-                      iconColor: logoColor,
+                      iconColor: violetColor,
                     ),
                   ],
                 ),
@@ -380,7 +304,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                 const SizedBox(height: 24),
                 
                 Text(
-                  'Alris - Smart URL Analysis',
+                  'Alris AI Analytics - Concept Demo',
                   style: TextStyle(
                     fontSize: 12,
                     color: isDarkMode ? Colors.white38 : Colors.grey[400],
@@ -427,7 +351,7 @@ class InfoCard extends StatelessWidget {
         onTap: onTap,
         borderRadius: BorderRadius.circular(16),
         child: Container(
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.all(20),
           decoration: BoxDecoration(
             color: isDarkMode 
                 ? Theme.of(context).colorScheme.surface
@@ -454,7 +378,7 @@ class InfoCard extends StatelessWidget {
                   fontSize: 15,
                 ),
               ),
-              const SizedBox(height: 4),
+              const SizedBox(height: 8),
               Text(
                 description,
                 style: TextStyle(
