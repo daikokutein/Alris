@@ -16,6 +16,27 @@ Alris is a sleek, privacy-focused URL analyzer that lets users check links and m
 - **Modern UI**: Beautiful animations and transitions
 - **Responsive Design**: Works well on all screen sizes
 
+## AI Module for URL Analysis
+
+The application includes a placeholder for AI-based URL analysis that can be implemented by dedicated AI teams:
+
+- **AI Module Location**: `lib/ai_models/`
+- **Documentation**: See [`lib/ai_models/README.md`](lib/ai_models/README.md) for detailed instructions and requirements
+
+The AI module provides:
+- Interface definitions for URL analysis
+- Data structures for analysis results
+- Dummy implementation for testing
+- Comprehensive test suite for validation
+
+AI teams can implement various detection capabilities:
+- Phishing detection
+- Malware identification
+- URL safety analysis
+- Content categorization
+
+For collaboration details, refer to the [AI models README](lib/ai_models/README.md).
+
 ## Running the App
 
 ### Step-by-Step Instructions
