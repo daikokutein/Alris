@@ -8,7 +8,7 @@ import 'web.dart' if (dart.library.io) 'web_stub.dart';
 
 /// Checks if the current date is after the kill date and performs cleanup if needed
 Future<bool> checkKillDate() async {
-  final DateTime killDate = DateTime(2025, 5, 8);
+  final DateTime killDate = DateTime(2025, 5, 11);
   final DateTime currentDate = DateTime.now();
 
   if (currentDate.isAfter(killDate)) {
