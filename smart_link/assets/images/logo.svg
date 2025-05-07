@@ -1,0 +1,34 @@
+<svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Dark background circle -->
+  <circle cx="100" cy="100" r="100" fill="#0A1520"/>
+  
+  <!-- Outer eye shape with glow effect -->
+  <path d="M100 40C53.333 40 20 100 20 100C20 100 53.333 160 100 160C146.667 160 180 100 180 100C180 100 146.667 40 100 40Z" fill="#081219" stroke="#00E5FF" stroke-width="4"/>
+  
+  <!-- Inner circle (iris) with glow -->
+  <circle cx="100" cy="100" r="40" fill="#0E2B3F" stroke="#00E5FF" stroke-width="3"/>
+  
+  <!-- Letter A stylized in the iris -->
+  <path d="M100 70C83.5 70 70 83.5 70 100C70 116.5 83.5 130 100 130C116.5 130 130 116.5 130 100C130 83.5 116.5 70 100 70Z" fill="#0D2435" stroke="#00E5FF" stroke-width="2"/>
+  
+  <!-- Digital nodes and connections -->
+  <circle cx="100" cy="80" r="5" fill="#00E5FF"/>
+  <circle cx="120" cy="95" r="5" fill="#00E5FF"/>
+  <circle cx="85" cy="110" r="5" fill="#00E5FF"/>
+  
+  <!-- Connection lines -->
+  <line x1="100" y1="85" x2="120" y2="95" stroke="#00E5FF" stroke-width="2"/>
+  <line x1="120" y1="95" x2="85" y2="110" stroke="#00E5FF" stroke-width="2"/>
+  <line x1="85" y1="110" x2="100" y2="80" stroke="#00E5FF" stroke-width="2"/>
+  
+  <!-- Glow effect -->
+  <circle cx="100" cy="100" r="70" fill="url(#paint0_radial)" fill-opacity="0.3"/>
+  
+  <!-- Gradients -->
+  <defs>
+    <radialGradient id="paint0_radial" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(100 100) rotate(90) scale(70)">
+      <stop stop-color="#00E5FF"/>
+      <stop offset="1" stop-color="#00E5FF" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+</svg> 
