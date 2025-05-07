@@ -150,15 +150,17 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                 const SizedBox(height: 20),
                 // Logo container with dark background
                 Container(
-                  width: 180,
-                  height: 180,
+                  width: 200,
+                  height: 200,
                   decoration: BoxDecoration(
-                    color: isDarkMode ? const Color(0xFF0F172A) : const Color(0xFF0F172A),
+                    color: isDarkMode 
+                        ? const Color(0xFF1A0F3C) 
+                        : const Color(0xFF2D1B69),
                     shape: BoxShape.circle,
                     boxShadow: [
                       BoxShadow(
-                        color: logoColor.withOpacity(0.2),
-                        blurRadius: 30,
+                        color: logoColor.withOpacity(0.3),
+                        blurRadius: 40,
                         spreadRadius: 5,
                       ),
                     ],
@@ -167,17 +169,38 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                     child: AnimatedBuilder(
                       animation: _pulseController,
                       builder: (context, child) {
-                        return Hero(
-                          tag: 'logo',
-                          child: SvgPicture.asset(
-                            'assets/images/logo.svg',
-                            width: 130 + (_pulseController.value * 10),
-                            height: 130 + (_pulseController.value * 10),
-                            colorFilter: ColorFilter.mode(
-                              logoColor,
-                              BlendMode.srcIn
+                        return Stack(
+                          alignment: Alignment.center,
+                          children: [
+                            // Glow effect behind the logo
+                            Container(
+                              width: 160 + (_pulseController.value * 15),
+                              height: 160 + (_pulseController.value * 15),
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: logoColor.withOpacity(0.3 + (_pulseController.value * 0.2)),
+                                    blurRadius: 30 + (_pulseController.value * 20),
+                                    spreadRadius: 5,
+                                  ),
+                                ],
+                              ),
                             ),
-                          ),
+                            // Actual logo
+                            Hero(
+                              tag: 'logo',
+                              child: SvgPicture.asset(
+                                'assets/images/logo.svg',
+                                width: 140 + (_pulseController.value * 10),
+                                height: 140 + (_pulseController.value * 10),
+                                colorFilter: ColorFilter.mode(
+                                  logoColor,
+                                  BlendMode.srcIn
+                                ),
+                              ),
+                            ),
+                          ],
                         );
                       },
                     ),
@@ -198,7 +221,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                   'Smart URL Analysis',
                   style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                     fontWeight: FontWeight.w800,
-                    color: isDarkMode ? Colors.white : const Color(0xFF1E293B),
+                    color: isDarkMode ? Colors.white : const Color(0xFF1A0F3C),
                   ),
                   textAlign: TextAlign.center,
                 )
@@ -224,9 +247,9 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                     borderRadius: BorderRadius.circular(24),
                     boxShadow: [
                       BoxShadow(
-                        color: logoColor.withOpacity(0.1),
-                        blurRadius: 20,
-                        offset: const Offset(0, 8),
+                        color: logoColor.withOpacity(0.15),
+                        blurRadius: 25,
+                        offset: const Offset(0, 10),
                       ),
                     ],
                   ),
@@ -246,7 +269,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                               fontWeight: FontWeight.w600,
                               color: isDarkMode 
                                 ? Colors.white70 
-                                : const Color(0xFF475569),
+                                : const Color(0xFF2D1B69),
                               fontSize: 16,
                             ),
                           ),

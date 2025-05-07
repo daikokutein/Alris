@@ -1,26 +1,15 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
-  <g>
-    <!-- Eye outline -->
-    <path d="M256 128C152.3 128 60.9 183.6 16.7 264c-3.7 6.7-3.7 14.3 0 21 44.2 80.4 135.6 136 239.3 136s195.1-55.6 239.3-136c3.7-6.7 3.7-14.3 0-21-44.2-80.4-135.6-136-239.3-136z" 
-      fill="none" stroke="#00E5FF" stroke-width="24" stroke-linecap="round" stroke-linejoin="round"/>
-    
-    <!-- Letter C with connection points -->
-    <path d="M256 208c-26.5 0-48 21.5-48 48s21.5 48 48 48c14.5 0 27.5-6.5 36.3-16.7" 
-      fill="none" stroke="#00E5FF" stroke-width="24" stroke-linecap="round" stroke-linejoin="round"/>
-    
-    <!-- Connection line to outer node -->
-    <path d="M293 240l45-45" 
-      fill="none" stroke="#00E5FF" stroke-width="16" stroke-linecap="round"/>
-    
-    <!-- Outer node -->
-    <circle cx="350" cy="180" r="14" fill="#00E5FF"/>
-    
-    <!-- Connection line to lower node -->
-    <path d="M293 270l45 45" 
-      fill="none" stroke="#00E5FF" stroke-width="16" stroke-linecap="round"/>
-    
-    <!-- Lower node -->
-    <circle cx="350" cy="330" r="14" fill="#00E5FF"/>
-  </g>
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200" fill="none">
+  <!-- Eye outer shape -->
+  <path d="M100 40C50 40 20 100 20 100C20 100 50 160 100 160C150 160 180 100 180 100C180 100 150 40 100 40Z" stroke="currentColor" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <!-- C shape inside -->
+  <path d="M110 80C95 80 80 90 80 100C80 110 95 120 110 120" stroke="currentColor" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <!-- Connection nodes and lines -->
+  <circle cx="110" cy="80" r="6" fill="currentColor"/>
+  <circle cx="110" cy="120" r="6" fill="currentColor"/>
+  <line x1="124" y1="90" x2="110" y2="80" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+  <line x1="124" y1="110" x2="110" y2="120" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="124" cy="90" r="6" fill="currentColor"/>
+  <circle cx="124" cy="110" r="6" fill="currentColor"/>
 </svg> 

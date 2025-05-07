@@ -1,21 +1,23 @@
 @echo off
-echo Setting up Alris with the new eye logo...
+echo ===================================================
+echo    Alris - Running App with New Eye Logo
+echo ===================================================
+echo.
 
-rem Get dependencies
-echo Getting Flutter dependencies...
-flutter pub get
-
-rem Generate icons from the SVG
+:: Generate app icons first
 echo Generating app icons...
-flutter pub run flutter_launcher_icons
+call generate_app_icons.bat
 
-rem Clean and build
-echo Cleaning and rebuilding the app...
-flutter clean
-flutter pub get
+echo.
+echo ===================================================
+echo Starting the app...
+echo ===================================================
+echo.
 
-rem Run the app in Chrome
-echo Starting Alris in Chrome...
-flutter run -d chrome
+:: Run the Flutter app
+call flutter run
 
-echo Done! 
+echo.
+echo ===================================================
+echo App closed. Thank you for using Alris!
+echo =================================================== 

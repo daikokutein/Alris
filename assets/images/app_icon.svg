@@ -1,40 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
-  <!-- Dark circular background -->
-  <circle cx="256" cy="256" r="256" fill="#0F172A"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" fill="none">
+  <!-- Background -->
+  <rect width="512" height="512" rx="128" fill="#0A0A18"/>
+  
+  <!-- Eye outer shape -->
+  <path d="M256 146C156 146 96 256 96 256C96 256 156 366 256 366C356 366 416 256 416 256C416 256 356 146 256 146Z" stroke="#00E5FF" stroke-width="24" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <!-- C shape inside -->
+  <path d="M276 206C246 206 216 226 216 256C216 286 246 306 276 306" stroke="#00E5FF" stroke-width="20" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <!-- Connection nodes and lines -->
+  <circle cx="276" cy="206" r="12" fill="#00E5FF"/>
+  <circle cx="276" cy="306" r="12" fill="#00E5FF"/>
+  <line x1="304" y1="226" x2="276" y2="206" stroke="#00E5FF" stroke-width="6" stroke-linecap="round"/>
+  <line x1="304" y1="286" x2="276" y2="306" stroke="#00E5FF" stroke-width="6" stroke-linecap="round"/>
+  <circle cx="304" cy="226" r="12" fill="#00E5FF"/>
+  <circle cx="304" cy="286" r="12" fill="#00E5FF"/>
   
   <!-- Glow effect -->
-  <circle cx="256" cy="256" r="220" fill="url(#glow)" fill-opacity="0.2"/>
-  
-  <g transform="translate(0, 10) scale(0.85)">
-    <!-- Eye outline -->
-    <path d="M256 128C152.3 128 60.9 183.6 16.7 264c-3.7 6.7-3.7 14.3 0 21 44.2 80.4 135.6 136 239.3 136s195.1-55.6 239.3-136c3.7-6.7 3.7-14.3 0-21-44.2-80.4-135.6-136-239.3-136z" 
-      fill="none" stroke="#00E5FF" stroke-width="24" stroke-linecap="round" stroke-linejoin="round"/>
-    
-    <!-- Letter C with connection points -->
-    <path d="M256 208c-26.5 0-48 21.5-48 48s21.5 48 48 48c14.5 0 27.5-6.5 36.3-16.7" 
-      fill="none" stroke="#00E5FF" stroke-width="24" stroke-linecap="round" stroke-linejoin="round"/>
-    
-    <!-- Connection line to outer node -->
-    <path d="M293 240l45-45" 
-      fill="none" stroke="#00E5FF" stroke-width="16" stroke-linecap="round"/>
-    
-    <!-- Outer node -->
-    <circle cx="350" cy="180" r="14" fill="#00E5FF"/>
-    
-    <!-- Connection line to lower node -->
-    <path d="M293 270l45 45" 
-      fill="none" stroke="#00E5FF" stroke-width="16" stroke-linecap="round"/>
-    
-    <!-- Lower node -->
-    <circle cx="350" cy="330" r="14" fill="#00E5FF"/>
-  </g>
-  
-  <!-- Gradients -->
-  <defs>
-    <radialGradient id="glow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(256 256) rotate(90) scale(220)">
-      <stop stop-color="#00E5FF"/>
-      <stop offset="1" stop-color="#00E5FF" stop-opacity="0"/>
-    </radialGradient>
-  </defs>
+  <path d="M256 146C156 146 96 256 96 256C96 256 156 366 256 366C356 366 416 256 416 256C416 256 356 146 256 146Z" stroke="#3AECFF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" filter="blur(4px)"/>
 </svg> 

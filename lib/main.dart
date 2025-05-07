@@ -19,6 +19,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     // Define logo color for consistent use throughout the app
     const logoColor = Color(0xFF00E5FF); // Cyan from the eye logo
+    // Define dark purple color for the theme
+    const darkPurple = Color(0xFF2D1B69);
+    const deeperPurple = Color(0xFF1A0F3C);
     
     return MaterialApp(
       title: 'Alris',
@@ -28,30 +31,30 @@ class MyApp extends StatelessWidget {
           seedColor: logoColor,
           brightness: Brightness.light,
           primary: logoColor,
-          secondary: const Color(0xFF0E2B3F), // Dark blue that complements cyan
+          secondary: darkPurple,
           tertiary: const Color(0xFF38BDF8), // Light blue
           surface: Colors.white,
-          surfaceTint: const Color(0xFFF8FAFC),
-          surfaceContainer: const Color(0xFFF1F5F9),
+          surfaceTint: Colors.white.withOpacity(0.9),
+          surfaceContainer: const Color(0xFFF8F9FA),
           error: const Color(0xFFEF4444),
         ),
         useMaterial3: true,
         textTheme: GoogleFonts.interTextTheme(Theme.of(context).textTheme).copyWith(
           displayLarge: GoogleFonts.inter(
             fontWeight: FontWeight.bold,
-            color: const Color(0xFF1E293B),
+            color: deeperPurple,
           ),
           displayMedium: GoogleFonts.inter(
             fontWeight: FontWeight.bold,
-            color: const Color(0xFF1E293B),
+            color: deeperPurple,
           ),
           headlineMedium: GoogleFonts.inter(
             fontWeight: FontWeight.bold,
-            color: const Color(0xFF1E293B),
+            color: deeperPurple,
           ),
           titleLarge: GoogleFonts.inter(
             fontWeight: FontWeight.w600,
-            color: const Color(0xFF1E293B),
+            color: deeperPurple,
           ),
           bodyLarge: GoogleFonts.inter(
             color: const Color(0xFF334155),
@@ -64,12 +67,12 @@ class MyApp extends StatelessWidget {
           centerTitle: false,
           elevation: 0,
           backgroundColor: Colors.white,
-          foregroundColor: const Color(0xFF1E293B),
+          foregroundColor: deeperPurple,
           systemOverlayStyle: SystemUiOverlayStyle.dark,
           titleTextStyle: GoogleFonts.inter(
             fontSize: 18,
             fontWeight: FontWeight.w600,
-            color: const Color(0xFF1E293B),
+            color: deeperPurple,
           ),
         ),
         elevatedButtonTheme: ElevatedButtonThemeData(
@@ -130,7 +133,7 @@ class MyApp extends StatelessWidget {
           ),
           surfaceTintColor: Colors.white,
         ),
-        scaffoldBackgroundColor: const Color(0xFFF1F5F9),
+        scaffoldBackgroundColor: const Color(0xFFF8F9FA),
         dividerTheme: DividerThemeData(
           color: Colors.grey[200],
           thickness: 1,
@@ -144,15 +147,17 @@ class MyApp extends StatelessWidget {
           secondary: const Color(0xFF81E6FF), // Lighter cyan
           tertiary: const Color(0xFF38BDF8), // Light blue
           error: const Color(0xFFF87171),
-          surface: const Color(0xFF1E293B),
-          surfaceContainer: const Color(0xFF0F172A),
+          surface: const Color(0xFF0A0A18),
+          background: const Color(0xFF0A0A18),
+          surfaceContainer: const Color(0xFF1A0F3C),
+          surfaceTint: const Color(0xFF1A0F3C),
         ),
         useMaterial3: true,
-        scaffoldBackgroundColor: const Color(0xFF0F172A),
+        scaffoldBackgroundColor: const Color(0xFF0A0A18),
         appBarTheme: AppBarTheme(
           centerTitle: false,
           elevation: 0,
-          backgroundColor: const Color(0xFF1E293B),
+          backgroundColor: const Color(0xFF1A0F3C),
           systemOverlayStyle: SystemUiOverlayStyle.light,
           titleTextStyle: GoogleFonts.inter(
             fontSize: 18,
@@ -162,12 +167,12 @@ class MyApp extends StatelessWidget {
         ),
         cardTheme: CardTheme(
           elevation: 2,
-          color: const Color(0xFF1E293B),
+          color: const Color(0xFF1A0F3C),
           shadowColor: Colors.black.withOpacity(0.15),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16),
           ),
-          surfaceTintColor: const Color(0xFF1E293B),
+          surfaceTintColor: const Color(0xFF1A0F3C),
         ),
         textTheme: GoogleFonts.interTextTheme(ThemeData.dark().textTheme).copyWith(
           displayLarge: GoogleFonts.inter(
@@ -206,7 +211,7 @@ class MyApp extends StatelessWidget {
         ),
         inputDecorationTheme: InputDecorationTheme(
           filled: true,
-          fillColor: const Color(0xFF1E293B),
+          fillColor: const Color(0xFF1A0F3C),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(12),
             borderSide: BorderSide(color: Colors.grey[800]!),

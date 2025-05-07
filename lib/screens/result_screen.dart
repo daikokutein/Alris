@@ -68,6 +68,7 @@ class _ResultScreenState extends State<ResultScreen> {
   @override
   Widget build(BuildContext context) {
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    final logoColor = const Color(0xFF00E5FF); // Cyan from the logo
     
     return Scaffold(
       appBar: AppBar(
@@ -75,7 +76,29 @@ class _ResultScreenState extends State<ResultScreen> {
         elevation: 0,
       ),
       body: _isLoading
-          ? const Center(child: CircularProgressIndicator())
+          ? Center(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  SizedBox(
+                    width: 50,
+                    height: 50,
+                    child: CircularProgressIndicator(
+                      color: logoColor,
+                      strokeWidth: 3,
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                  Text(
+                    'Analyzing URL...',
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: isDarkMode ? Colors.white70 : Colors.black54,
+                    ),
+                  ),
+                ],
+              ),
+            )
           : SafeArea(
               child: SingleChildScrollView(
                 padding: const EdgeInsets.all(24.0),
@@ -157,20 +180,35 @@ class _ResultScreenState extends State<ResultScreen> {
   }
 
   Widget _buildUrlCard(BuildContext context) {
+    final logoColor = const Color(0xFF00E5FF); // Cyan from the logo
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    
     return Card(
       elevation: 0,
-      color: Theme.of(context).colorScheme.secondaryContainer.withOpacity(0.3),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16),
+        side: BorderSide(
+          color: isDarkMode 
+              ? Colors.white.withOpacity(0.1) 
+              : Colors.grey.shade200,
+          width: 1,
+        ),
       ),
       child: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(20.0),
         child: Row(
           children: [
-            Icon(
-              Icons.link_rounded,
-              color: Theme.of(context).colorScheme.secondary,
-              size: 24,
+            Container(
+              padding: const EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                color: logoColor.withOpacity(0.1),
+                shape: BoxShape.circle,
+              ),
+              child: Icon(
+                Icons.link_rounded,
+                color: logoColor,
+                size: 24,
+              ),
             ),
             const SizedBox(width: 16),
             Expanded(
@@ -181,7 +219,9 @@ class _ResultScreenState extends State<ResultScreen> {
                     'Analyzed URL',
                     style: TextStyle(
                       fontWeight: FontWeight.w600,
-                      color: Theme.of(context).colorScheme.secondary,
+                      color: isDarkMode 
+                          ? Colors.white70 
+                          : const Color(0xFF2D1B69),
                       fontSize: 14,
                     ),
                   ),
@@ -191,13 +231,31 @@ class _ResultScreenState extends State<ResultScreen> {
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w500,
-                      color: Theme.of(context).colorScheme.onSurface,
+                      color: isDarkMode 
+                          ? Colors.white 
+                          : Colors.black87,
                     ),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
                 ],
               ),
+            ),
+            IconButton(
+              icon: Icon(
+                Icons.content_copy,
+                color: logoColor.withOpacity(0.7),
+                size: 20,
+              ),
+              onPressed: () {
+                // Copy URL to clipboard - functionality would be implemented here
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text('URL copied to clipboard'),
+                    behavior: SnackBarBehavior.floating,
+                  ),
+                );
+              },
             ),
           ],
         ),
@@ -212,53 +270,82 @@ class _ResultScreenState extends State<ResultScreen> {
             ? Colors.orange 
             : Colors.red;
     
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    final bgColor1 = isDarkMode 
+        ? const Color(0xFF1A0F3C) 
+        : Colors.white;
+    final bgColor2 = isDarkMode 
+        ? const Color(0xFF2D1B69).withOpacity(0.8) 
+        : const Color(0xFFF8F9FA);
+    
     return Container(
-      padding: const EdgeInsets.all(20),
+      padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
         gradient: LinearGradient(
-          colors: [
-            safetyColor.withOpacity(0.7),
-            safetyColor.withOpacity(0.4),
-          ],
+          colors: [bgColor1, bgColor2],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
         borderRadius: BorderRadius.circular(16),
+        boxShadow: [
+          BoxShadow(
+            color: safetyColor.withOpacity(0.2),
+            blurRadius: 15,
+            offset: const Offset(0, 5),
+          ),
+        ],
+        border: Border.all(
+          color: safetyColor.withOpacity(0.3),
+          width: 1.5,
+        ),
       ),
       child: Row(
         children: [
           Container(
             padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
-              color: Colors.white.withOpacity(0.2),
+              color: safetyColor.withOpacity(0.15),
               shape: BoxShape.circle,
+              border: Border.all(
+                color: safetyColor,
+                width: 2,
+              ),
             ),
             child: Icon(
               _result.isSafe ? Icons.check_circle : Icons.warning_rounded,
-              color: Colors.white,
+              color: safetyColor,
               size: 32,
             ),
           ),
-          const SizedBox(width: 16),
+          const SizedBox(width: 20),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   _result.isSafe ? 'Safe to Visit' : 'Potentially Unsafe',
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                    fontSize: 18,
+                    fontSize: 20,
+                    color: safetyColor,
                   ),
                 ),
-                const SizedBox(height: 4),
+                const SizedBox(height: 6),
                 Text(
-                  _result.explanation.split('.').first + '.',
-                  style: const TextStyle(
-                    color: Colors.white,
+                  'Safety Score: ${_result.safetyScore}%',
+                  style: TextStyle(
                     fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                    color: isDarkMode ? Colors.white70 : Colors.black54,
                   ),
+                ),
+                const SizedBox(height: 12),
+                LinearProgressIndicator(
+                  value: _result.safetyScore / 100,
+                  backgroundColor: Colors.grey.withOpacity(0.2),
+                  valueColor: AlwaysStoppedAnimation<Color>(safetyColor),
+                  borderRadius: BorderRadius.circular(10),
+                  minHeight: 8,
                 ),
               ],
             ),

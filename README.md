@@ -7,7 +7,7 @@
 
 ## Overview
 
-Alris is a sleek, privacy-focused URL analyzer that lets users check links and maintain a local history of scanned URLs. The app features a modern UI with glowing cyan accents, smooth animations, dark mode support, and intuitive navigation.
+Alris is a sleek, privacy-focused URL analyzer that lets users check links and maintain a local history of scanned URLs. The app features a modern UI with an eye-catching cyan eye logo, elegant dark purple theming, smooth animations, dark mode support, and intuitive navigation.
 
 ## Features
 
@@ -15,7 +15,7 @@ Alris is a sleek, privacy-focused URL analyzer that lets users check links and m
 - **Local Storage**: All data is stored locally on your device - no cloud or remote servers
 - **History Tracking**: Keep track of all analyzed URLs with timestamps
 - **Privacy First**: No data leaves your device
-- **Dark Mode Support**: Automatically adapts to your system preferences with a beautiful dark theme
+- **Dark Mode Support**: Automatically adapts to your system preferences with a beautiful dark purple theme
 - **Modern UI**: Smooth animations and eye-catching cyan accents
 - **Responsive Design**: Works well on all screen sizes
 
@@ -49,6 +49,8 @@ Run the included script:
 ```
 run_with_new_logo.bat
 ```
+
+This script generates app icons and runs the app with the new eye logo.
 
 #### Option 1: Run in Chrome (Web)
 
@@ -92,9 +94,9 @@ run_with_new_logo.bat
 
 ### Design Elements
 
-- **Eye Logo**: The glowing cyan eye with digital connections represents the app's security focus
-- **Color Scheme**: Primarily uses cyan (#00E5FF) with dark backgrounds for contrast
-- **Animations**: Subtle pulse and scale animations bring the UI to life
+- **Eye Logo**: The glowing cyan eye with a "C" shape and connection nodes represents the app's security focus and digital connectivity
+- **Color Scheme**: Uses a vibrant cyan (#00E5FF) with white and dark purple (#1A0F3C, #2D1B69) backgrounds for a modern look
+- **Animations**: Subtle pulse, glow and scale animations bring the UI to life
 - **Typography**: Clean, readable Inter font from Google Fonts
 
 ### Architecture
@@ -110,12 +112,12 @@ run_with_new_logo.bat
 The eye logo is available in SVG format and can be customized:
 
 1. Edit the SVG files in `assets/images/logo.svg` and `assets/images/app_icon.svg`
-2. Generate new app icons with:
+2. Generate new app icons using the included script:
    ```
-   flutter pub run flutter_launcher_icons
+   generate_app_icons.bat
    ```
 
-Alternatively, use the included `generate_app_icons.bat` script if you have ImageMagick installed.
+This uses the Flutter launcher icons package to generate icons for all platforms.
 
 ## License
 
